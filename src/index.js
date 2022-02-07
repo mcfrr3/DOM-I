@@ -39,4 +39,84 @@ const siteContent = { // DO NOT CHANGE THIS OBJECT
   },
 };
 
-console.log('project wired!')
+console.log('project wired!');
+
+/* Helper functions */
+function fillTextContent (nodeObject, index, fillObj) {
+  const textContent = nodeObject.querySelector(`.text-content:nth-of-type(${index})`);
+  textContent.querySelector("h4").textContent = fillObj.h4;
+  textContent.querySelector("p").textContent = fillObj.p;
+}
+
+/* Declare variables */
+/* Helper data variables */
+const mainContent = siteContent["main-content"];
+const contact = siteContent.contact;
+const footer = siteContent.footer;
+const images = siteContent.images;
+
+/* Query Selector Variables */
+const navLinks = document.querySelectorAll("header nav a");
+
+const ctaTitle = document.querySelector(".cta-text h1");
+const ctaButton = document.querySelector(".cta-text button");
+
+const mainContTop = document.querySelector(".main-content .top-content");
+const mainContBottom = document.querySelector(".main-content .bottom-content");
+
+/* Add text contents */
+// loop through nav links to insert link text
+navLinks.forEach((link, index) => {
+  link.textContent = siteContent.nav[`nav-item-${index + 1}`];
+})
+
+ctaTitle.textContent = siteContent.cta.h1;
+ctaButton.textContent = siteContent.cta.button;
+
+fillTextContent(mainContTop, 1, {
+    h4: mainContent["features-h4"], 
+    p: mainContent["features-content"]
+});
+
+fillTextContent(mainContTop, 2, {
+  h4: mainContent["about-h4"],
+  p: mainContent["about-content"]
+});
+
+fillTextContent(mainContBottom, 1, {
+  h4: mainContent["services-h4"],
+  p: mainContent["services-content"]
+});
+
+fillTextContent(mainContBottom, 2, {
+  h4: mainContent["product-h4"],
+  p: mainContent["product-content"]
+});
+
+fillTextContent(mainContBottom, 3, {
+  h4: mainContent["vision-h4"],
+  p: mainContent["vision-content"]
+});
+
+document.querySelector(".contact h4").textContent = contact["contact-h4"];
+document.querySelector(".contact p:nth-of-type(1)").textContent = contact.address;
+document.querySelector(".contact p:nth-of-type(2)").textContent = contact.phone;
+document.querySelector(".contact p:nth-of-type(3)").textContent = contact.email;
+
+document.querySelector("footer a").textContent = footer.copyright;
+
+/* Add class names */
+
+const italicLinks = Array.from(navLinks);
+italicLinks.map(link => {
+  link.classList.add("italic");
+})
+
+document.querySelector("footer a").classList.add("bold");
+
+/* Add image sources */
+
+document.querySelector("#logo-img").setAttribute('src', images["logo-img"]);
+document.querySelector("#cta-img").setAttribute('src', images["cta-img"]);
+document.querySelector("#middle-img").setAttribute('src', images["accent-img"]);
+
